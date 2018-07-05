@@ -16,8 +16,9 @@ cookie_dir= r'C:\Users\mzy\AppData\Local\Google\Chrome\User Data'    # 对应你
 chrome_options=webdriver.ChromeOptions()
 # chrome_options.add_argument("--no-sandbox")
 # chrome_options.add_argument("--disable-setuid-sandbox")
-chrome_options.add_argument('--profile-directory=Default')
-chrome_options.add_argument("--user-data-dir="+os.path.abspath(cookie_dir))  
+
+# chrome_options.add_argument('--profile-directory=Default')
+chrome_options.add_argument("user-data-dir="+os.path.abspath(cookie_dir))  
 
 driver=webdriver.Chrome(chrome_options=chrome_options)
 driver.maximize_window()
