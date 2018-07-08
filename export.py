@@ -13,10 +13,11 @@ _name = "毛阳光很阳光"
 cookie_dir = r'C:\Users\mzy\AppData\Local\Google\Chrome\User Data'    # 对应你的chrome的用户数据存放路径  
 
 chrome_options = webdriver.ChromeOptions()
-# chrome_options.add_argument('profile-directory=Default')
-# chrome_options.add_argument("user-data-dir="+os.path.abspath(cookie_dir))  
+chrome_options.add_argument('profile-directory=Default')
+chrome_options.add_argument("user-data-dir="+os.path.abspath(cookie_dir))  
 # print(os.path.abspath(cookie_dir))
-chromedriver_path = r'/usr/local/bin/chromedriver'
+# chromedriver_path = r'/usr/local/bin/chromedriver'
+chromedriver_path = r'D:\programs\netease_to_qq\chromedrivers\chromedriver.exe'
 chromedriver_path = os.path.abspath(chromedriver_path)
 driver=webdriver.Chrome(executable_path = chromedriver_path, chrome_options=chrome_options)
 driver.maximize_window()
@@ -39,7 +40,7 @@ driver.switch_to.frame("g_iframe")
 ele = driver.find_element_by_css_selector(".m-tabs-srch>li:last-child")
 ele.click()
 
-time.sleep(0.1)
+time.sleep(0.5)
 
 # 找到查到的用户
 ele = driver.find_element_by_css_selector(".h-flag>.first.w7>.u-cover.u-cover-3")
