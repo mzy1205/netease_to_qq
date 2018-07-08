@@ -1,0 +1,17 @@
+RK	myValue	.qq.com	/	2038-01-19T03:14:08.463Z	12				
+_qpsvr_localtk	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	32				
+login_type	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	11				
+pgv_info	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	24				
+pgv_pvi	myValue	.qq.com	/	2038-01-18T00:00:00.000Z	17				
+pgv_pvid	myValue	.qq.com	/	2038-01-18T00:00:00.000Z	16				
+pgv_si	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	17				
+pt2gguin	myValue	.qq.com	/	2038-01-19T03:14:08.028Z	19				
+ptcz	myValue	.qq.com	/	2038-01-19T03:14:08.906Z	68				
+qm_keyst	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	72				
+ts_last	myValue	.y.qq.com	/	2018-07-08T08:21:59.000Z	16				
+ts_uid	myValue	.y.qq.com	/	2020-07-07T07:51:59.000Z	16				
+wxopenid	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	36				
+wxrefresh_token	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	104				
+wxuin	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	25				
+wxunionid	myValue	.qq.com	/	1969-12-31T23:59:59.000Z	37				
+yqq_stat	myValue	.y.qq.com	/	1969-12-31T23:59:59.000Z	9			
