@@ -20,8 +20,13 @@ driver=webdriver.Chrome(executable_path = chromedriver_path, chrome_options=chro
 driver.maximize_window()
 driver.get("https://y.qq.com/")
 
-driver.delete_all_cookies()
-for k in cookies:
-    print(k + ' -- ' + str(cookies[k]))
-    driver.add_cookie({'name':k,'value':cookies[k]})
-    
+# driver.delete_all_cookies()
+# for k in cookies:
+#     print(k + ' -- ' + str(cookies[k]))
+#     driver.add_cookie({'name':k,'value':cookies[k]})
+# f = open("tmp.html", "w")
+# f.write(driver.page_source)
+# print(driver.page_source)
+time.sleep(30)
+ele = driver.find_element_by_css_selector(".top_nav__item:nth-child(2)")
+ele.click()
