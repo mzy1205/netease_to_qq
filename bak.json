@@ -1,0 +1,39 @@
+{
+    "3": {
+        "playlist_name": "\u8138\u7ea2",
+        "link": "https://music.163.com/playlist?id=2091371219",
+        "songs": {
+            "2": {
+                "song_name": "\u8001\u53f8\u673a\u5e26\u5e26\u6211(\u4e91\u5357\u5c71\u6b4c)",
+                "singer": "\u7fa4\u661f",
+                "album": "\u70ed\u95e8\u534e\u8bed1"
+            },
+            "3": {
+                "song_name": "tokyo\u00a0hot(\u4e1c\u4eac\u70ed)(\u9b5cRemix)",
+                "singer": "\u9b5c",
+                "album": "tokyo\u00a0hot(\u4e1c\u4eac\u70ed)(\u9b5cRemix)"
+            }
+        }
+    },
+    "4": {
+        "playlist_name": "\u738b\u83f2",
+        "link": "https://music.163.com/playlist?id=2091371219",
+        "songs": {
+            "1": {
+                "song_name": "\u8981\u4e0d\u8981\u7a81\u7136\u53bb\u6380\u5973\u5b69\u5b50\u7684\u88d9\u5b50\u5462",
+                "singer": "\u6ce5\u9cc5Niko",
+                "album": "\u8981\u4e0d\u8981\u7a81\u7136\u53bb\u6380\u5973\u5b69\u5b50\u7684\u88d9\u5b50\u5462"
+            },
+            "2": {
+                "song_name": "\u8001\u53f8\u673a\u5e26\u5e26\u6211(\u4e91\u5357\u5c71\u6b4c)",
+                "singer": "\u7fa4\u661f",
+                "album": "\u70ed\u95e8\u534e\u8bed1"
+            },
+            "3": {
+                "song_name": "tokyo\u00a0hot(\u4e1c\u4eac\u70ed)(\u9b5cRemix)",
+                "singer": "\u9b5c",
+                "album": "tokyo\u00a0hot(\u4e1c\u4eac\u70ed)(\u9b5cRemix)"
+            }
+        }
+    }
+}
