@@ -30,7 +30,7 @@ driver.get("https://y.qq.com/")
 # f = open("tmp.html", "w")
 # f.write(driver.page_source)
 # print(driver.page_source)
-time.sleep(8)
+time.sleep(15)
 ele = driver.find_element_by_css_selector(".top_nav__item:nth-child(2)")        #点击我的音乐
 ele.click()
 
@@ -64,13 +64,13 @@ for k in play_lists:        #创建歌单
         #获取第一条查询结果的name、singer、album_name
         try:
             print(sys._getframe().f_lineno)
-            ele = driver.find_element_by_css_selector(".songlist__artist:nth-child(1)")
+            ele = driver.find_element_by_xpath("//div[@class='songlist__artist'][1]")
             artist = ele.text
             print(sys._getframe().f_lineno)
-            ele = driver.find_element_by_css_selector(".songlist__album:nth-child(1)")
+            ele = driver.find_element_by_xpath("//div[@class='songlist__album'][1]")
             album = ele.text
             print(sys._getframe().f_lineno)
-            ele = driver.find_element_by_css_selector(".songlist__songname_txt:nth-child(1)")
+            ele = driver.find_element_by_xpath("//div[@class='songlist__songname'][1]/span[@class='songlist__songname_txt']")
             songname = ele.text
             print(sys._getframe().f_lineno)
             if ((songname == play_lists[k]["songs"][song_k]["song_name"]) and (artist == play_lists[k]["songs"][song_k]["singer"]) and (album == play_lists[k]["songs"][song_k]["album"])):
@@ -90,10 +90,14 @@ for k in play_lists:        #创建歌单
                 time.sleep(0.1)
 
                 print(sys._getframe().f_lineno)
-                eles = driver.find_elements_by_css_selector('.js_addto_taogelist')
-                for ele in eles:
-                    if (ele.text == play_lists[k]['playlist_name']):            #找到歌单并点击
-                        ele.click()
+                eles = driver.find_elements_by_xpath("//a[@class='operate_menu__link js_addto_taogelist']")
+                print(sys._getframe().f_lineno)
+                print('歌单名称' + play_lists[k]['playlist_name'])
+                print(eles)
+                for ek in eles:
+                    print(eles[ek].text)
+                    if (eles[ek].text == play_lists[k]['playlist_name']):            #找到歌单并点击
+                        eles[ek].click()
                         break
                         
             else:           #找到歌曲，但是没有完全匹配记录该条歌曲信息
@@ -104,7 +108,7 @@ for k in play_lists:        #创建歌单
                     "album"    : play_lists[k]["songs"][song_k]["album"]}
 
         except NoSuchElementException as ex:  # 找不到(根据歌曲名称和专辑未找到结果)记录下该条歌曲信息，等写文件
-            # print(play_lists[k]["songs"][song_k]["song_name"] + ' -- 未找到')
+            print(sys._getframe().f_lineno)
             lost[k]['songs'][song_k] = {
                 "song_name": play_lists[k]["songs"][song_k]["song_name"], 
                 "singer"   : play_lists[k]["songs"][song_k]["singer"], 
