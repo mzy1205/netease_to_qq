@@ -6,6 +6,7 @@ import time
 import json
 # from cookie_json import cookies
 import common
+import sys
 
 cookie_dir = r'/home/itzj00100/.config/google-chrome'    # 对应你的chrome的用户数据存放路径
 # cookie_dir = r'C:\Users\mzy\AppData\Local\Google\Chrome\User Data'    # 对应你的chrome的用户数据存放路径  
@@ -29,7 +30,7 @@ driver.get("https://y.qq.com/")
 # f = open("tmp.html", "w")
 # f.write(driver.page_source)
 # print(driver.page_source)
-time.sleep(10)
+time.sleep(8)
 ele = driver.find_element_by_css_selector(".top_nav__item:nth-child(2)")        #点击我的音乐
 ele.click()
 
@@ -52,33 +53,58 @@ for k in play_lists:        #创建歌单
     ele = driver.find_element_by_css_selector(".popup__ft button:nth-child(2)")
     ele.click()
 
-    ele = driver.find_element_by_css_selector(".search_input__input")
     lost[k] = {"playlist_name": play_lists[k]['playlist_name'], "link": play_lists[k]['link'], "songs": {}}
     for song_k in play_lists[k]["songs"]:
+        ele = driver.find_element_by_css_selector(".search_input__input")
+        ele.clear()
         ele.send_keys(play_lists[k]["songs"][song_k]["song_name"] + ' ' + play_lists[k]["songs"][song_k]["album"])  #根据歌曲名称和专辑名称查找，基本能匹配
         ele.send_keys(Keys.ENTER)
         time.sleep(0.2)
 
         #获取第一条查询结果的name、singer、album_name
         try:
-            ele = driver.find_element_by_css_selector(".songlist__songname_txt:nth-child(1)")
-            songname = ele.text
-
+            print(sys._getframe().f_lineno)
             ele = driver.find_element_by_css_selector(".songlist__artist:nth-child(1)")
             artist = ele.text
-
+            print(sys._getframe().f_lineno)
             ele = driver.find_element_by_css_selector(".songlist__album:nth-child(1)")
             album = ele.text
-
+            print(sys._getframe().f_lineno)
+            ele = driver.find_element_by_css_selector(".songlist__songname_txt:nth-child(1)")
+            songname = ele.text
+            print(sys._getframe().f_lineno)
             if ((songname == play_lists[k]["songs"][song_k]["song_name"]) and (artist == play_lists[k]["songs"][song_k]["singer"]) and (album == play_lists[k]["songs"][song_k]["album"])):
-                pass
+                # print(play_lists[k]["songs"][song_k]["song_name"] + ' -- 找到啦')
+                print(sys._getframe().f_lineno)
+                ele.click()             #点击歌名跳转到歌曲详细页面
+                time.sleep(0.5)
+                
+                print(sys._getframe().f_lineno)
+                ele = driver.find_element_by_css_selector('.js_more')       #点击更多按钮
+                ele.click()
+                time.sleep(0.1)
+
+                print(sys._getframe().f_lineno)
+                ele = driver.find_element_by_css_selector('.js_menu_fav')     #点击添加到按钮
+                ele.click()
+                time.sleep(0.1)
+
+                print(sys._getframe().f_lineno)
+                eles = driver.find_elements_by_css_selector('.js_addto_taogelist')
+                for ele in eles:
+                    if (ele.text == play_lists[k]['playlist_name']):            #找到歌单并点击
+                        ele.click()
+                        break
+                        
             else:           #找到歌曲，但是没有完全匹配记录该条歌曲信息
+                # print(play_lists[k]["songs"][song_k]["song_name"] + ' -- 没有完全匹配')
                 lost[k]['songs'][song_k] = {
                     "song_name": play_lists[k]["songs"][song_k]["song_name"],
                     "singer"   : play_lists[k]["songs"][song_k]["singer"],
                     "album"    : play_lists[k]["songs"][song_k]["album"]}
 
         except NoSuchElementException as ex:  # 找不到(根据歌曲名称和专辑未找到结果)记录下该条歌曲信息，等写文件
+            # print(play_lists[k]["songs"][song_k]["song_name"] + ' -- 未找到')
             lost[k]['songs'][song_k] = {
                 "song_name": play_lists[k]["songs"][song_k]["song_name"], 
                 "singer"   : play_lists[k]["songs"][song_k]["singer"], 
@@ -87,3 +113,14 @@ for k in play_lists:        #创建歌单
         #     return
         # finally:
         #     return
+    ele = driver.find_element_by_css_selector(".top_nav__item:nth-child(2)")        #点击我的音乐
+    ele.click()
+    time.sleep(2)
+
+    time.sleep(1)
+    ele = driver.find_element_by_css_selector(".mod_tab__item:nth-child(3)")        #点击我创建的歌单
+    ele.click()
+
+#歌曲导入完成后把未找到的歌曲写入文件
+f = open("lost.json", "w")
+f.write(json.dumps(lost))
