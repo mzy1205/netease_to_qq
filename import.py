@@ -38,7 +38,7 @@ time.sleep(1)
 ele = driver.find_element_by_css_selector(".mod_tab__item:nth-child(3)")        #点击我创建的歌单
 ele.click()
 
-play_lists = common.load_play_lists('bak.json')
+play_lists = common.load_play_lists('play_lists.json')
 lost = {}
 for k in play_lists:        #创建歌单
     print(play_lists[k]['playlist_name'])
@@ -59,7 +59,7 @@ for k in play_lists:        #创建歌单
         ele.clear()
         ele.send_keys(play_lists[k]["songs"][song_k]["song_name"] + ' ' + play_lists[k]["songs"][song_k]["album"])  #根据歌曲名称和专辑名称查找，基本能匹配
         ele.send_keys(Keys.ENTER)
-        time.sleep(0.2)
+        time.sleep(0.5)
 
         #获取第一条查询结果的name、singer、album_name
         try:
@@ -73,8 +73,12 @@ for k in play_lists:        #创建歌单
             ele = driver.find_element_by_xpath("//div[@class='songlist__songname'][1]/span[@class='songlist__songname_txt']")
             songname = ele.text
             print(sys._getframe().f_lineno)
-            if ((songname == play_lists[k]["songs"][song_k]["song_name"]) and (artist == play_lists[k]["songs"][song_k]["singer"]) and (album == play_lists[k]["songs"][song_k]["album"])):
-                # print(play_lists[k]["songs"][song_k]["song_name"] + ' -- 找到啦')
+
+            json_song_name = play_lists[k]["songs"][song_k]["song_name"]
+            json_singer = play_lists[k]["songs"][song_k]["singer"]
+            json_album = play_lists[k]["songs"][song_k]["album"]
+
+            if (((songname in json_song_name) or (json_song_name in songname)) and ((artist in json_singer) or (json_singer in artist)) and ((album in json_album) or (json_album in album))):
                 print(sys._getframe().f_lineno)
                 ele.click()             #点击歌名跳转到歌曲详细页面
                 time.sleep(0.5)
@@ -82,12 +86,12 @@ for k in play_lists:        #创建歌单
                 print(sys._getframe().f_lineno)
                 ele = driver.find_element_by_css_selector('.js_more')       #点击更多按钮
                 ele.click()
-                time.sleep(0.1)
+                time.sleep(0.5)
 
                 print(sys._getframe().f_lineno)
                 ele = driver.find_element_by_css_selector('.js_menu_fav')     #点击添加到按钮
                 ele.click()
-                time.sleep(0.1)
+                time.sleep(0.5)
 
                 print(sys._getframe().f_lineno)
                 eles = driver.find_elements_by_xpath("//a[@class='operate_menu__link js_addto_taogelist']")
@@ -95,9 +99,10 @@ for k in play_lists:        #创建歌单
                 print('歌单名称' + play_lists[k]['playlist_name'])
                 print(eles)
                 for ek in eles:
-                    print(eles[ek].text)
-                    if (eles[ek].text == play_lists[k]['playlist_name']):            #找到歌单并点击
-                        eles[ek].click()
+                    print(ek.text)
+                    if (ek.text == play_lists[k]['playlist_name']):            #找到歌单并点击
+                        ek.click()
+                        time.sleep(0.5)
                         break
                         
             else:           #找到歌曲，但是没有完全匹配记录该条歌曲信息
