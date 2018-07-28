@@ -8,7 +8,7 @@ import json
 import common
 import sys
 
-cookie_dir = r'/home/itzj00100/.config/google-chrome'    # 对应你的chrome的用户数据存放路径
+cookie_dir = r'/home/mzy/.config/google-chrome'    # 对应你的chrome的用户数据存放路径
 # cookie_dir = r'C:\Users\mzy\AppData\Local\Google\Chrome\User Data'    # 对应你的chrome的用户数据存放路径  
 
 chrome_options = webdriver.ChromeOptions()
@@ -81,7 +81,7 @@ for k in play_lists:        #创建歌单
             if (((songname in json_song_name) or (json_song_name in songname)) and ((artist in json_singer) or (json_singer in artist)) and ((album in json_album) or (json_album in album))):
                 print(sys._getframe().f_lineno)
                 ele.click()             #点击歌名跳转到歌曲详细页面
-                time.sleep(0.5)
+                time.sleep(2)
                 
                 print(sys._getframe().f_lineno)
                 ele = driver.find_element_by_css_selector('.js_more')       #点击更多按钮
